@@ -1,15 +1,84 @@
 import java.util.LinkedList;
+import java.util.Iterator;
 
 // A classe Mergesort a ser completada
 class Mergesort {
 
     static void split(LinkedList<Integer> l, LinkedList<Integer> l1, LinkedList<Integer> l2) {
-        // a ser completada
+        Iterator<Integer> l_it=l.iterator();
+
+        int counter=0, size=l.size();
+
+        if(l.isEmpty()){return;}
+        else{
+            while(l_it.hasNext()){
+                if(counter<(size/2+size%2)){
+                    l1.add(l_it.next());
+                    counter++;
+                }
+                else{
+                    l2.add(l_it.next());
+                }
+            }
+            return;
+        }
+        
     }
 
-    static LinkedList<Integer> merge(LinkedList<Integer> l1,
-                                     LinkedList<Integer> l2) {
-        return null; // a ser completada
+    static LinkedList<Integer> merge(LinkedList<Integer> l1,LinkedList<Integer> l2) {
+        LinkedList<Integer> l=new LinkedList<Integer>();
+       
+        if(l1.isEmpty() && l2.isEmpty()){return l;}
+        else if(!l1.isEmpty() && l2.isEmpty()){ return l1;}
+        else if(l1.isEmpty() && !l2.isEmpty()){ return l2;}
+        else{
+            Iterator<Integer> l1_it=l1.iterator();
+            Iterator<Integer> l2_it=l2.iterator();
+
+            Integer l1_value, l2_value;
+
+            bool l1_hasvalue=false, l2_hasvalue=false;
+
+
+            while(!l1_it.hasNext() || !l2_it.hasNext()){
+                if(l1_it.hasNext() && l2_it.hasNext()){
+                    if(!l1_hasvalue){
+                        l1_value=l1_it.hasNext();
+                    }
+                    if(!l2_hasvalue){
+                        l2_value=l2_it.hasNext();
+                    }
+
+                    if(l1_value<l2_value){
+                        l.add(l1_value);
+                        l1_hasvalue=false;
+                    }
+                    else{
+                        l.add(l2_value);
+                        l2_hasvalue=false;
+                    }
+                }
+                if(!l1_it.hasNext()){
+                    l.add()
+                }
+            }
+
+            if(l1_hasvalue && l2_hasvalue){
+                if(l1_value<l2_value){
+                    l.add(l1_value);
+                    l.add(l2_value);
+                }
+                else{
+                    l.add(l2_value);
+                    l.add(l1_value);
+                }
+            }
+            else if (l1_hasvalue && !l2_hasvalue){l.add(l1_value);}
+            else if (!l1_hasvalue && l2_hasvalue){l.add(l2_value);}
+
+
+
+        }
     }
 
     static LinkedList<Integer> mergesort(LinkedList<Integer> l) {
@@ -17,7 +86,7 @@ class Mergesort {
     }
 }
 
-// A classe Ex1 é fornecida fournie, para testar o código de Mergesort
+// A classe Ex1 ï¿½ fornecida fournie, para testar o cï¿½digo de Mergesort
 class Ex1 {
 
     static boolean is_sorted(LinkedList<Integer> l) {
@@ -30,7 +99,7 @@ class Ex1 {
         return true;
     }
 
-    static final int M = 10; // os elementos estão entre 0..M-1
+    static final int M = 10; // os elementos estï¿½o entre 0..M-1
 
     static int[] occurrences(LinkedList<Integer> l) {
         int[] occ = new int[M];
