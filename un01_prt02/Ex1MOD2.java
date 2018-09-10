@@ -5,84 +5,102 @@ import java.util.Iterator;
 class Mergesort {
 
     static void split(LinkedList<Integer> l, LinkedList<Integer> l1, LinkedList<Integer> l2) {
-        Iterator<Integer> l_it=l.iterator();
+        Iterator<Integer> l_it = l.iterator();
 
-        int counter=0, size=l.size();
+        int counter = 0, size = l.size();
 
-        if(l.isEmpty()){return;}
-        else{
-            while(l_it.hasNext()){
-                if(counter<(size/2+size%2)){
+        if (l.isEmpty()) {
+            return;
+        } else {
+            while (l_it.hasNext()) {
+                if (counter < (size / 2 + size % 2)) {
                     l1.add(l_it.next());
                     counter++;
-                }
-                else{
+                } else {
                     l2.add(l_it.next());
                 }
             }
             return;
         }
-        
+
     }
 
-    static LinkedList<Integer> merge(LinkedList<Integer> l1,LinkedList<Integer> l2) {
-        LinkedList<Integer> l=new LinkedList<Integer>();
-       
-        if(l1.isEmpty() && l2.isEmpty()){return l;}
-        else if(!l1.isEmpty() && l2.isEmpty()){ return l1;}
-        else if(l1.isEmpty() && !l2.isEmpty()){ return l2;}
-        else{
-            Iterator<Integer> l1_it=l1.iterator();
-            Iterator<Integer> l2_it=l2.iterator();
+    static LinkedList<Integer> merge(LinkedList<Integer> l1, LinkedList<Integer> l2) {
+        LinkedList<Integer> l = new LinkedList<Integer>();
 
-            Integer l1_value, l2_value;
+        if (l1.isEmpty() && l2.isEmpty()) {
+            return l;
+        } else if (!l1.isEmpty() && l2.isEmpty()) {
+            return l1;
+        } else if (l1.isEmpty() && !l2.isEmpty()) {
+            return l2;
+        } else {
+            Iterator<Integer> l1_it = l1.iterator();
+            Iterator<Integer> l2_it = l2.iterator();
 
-            bool l1_hasvalue=false, l2_hasvalue=false;
+            Integer l1_value = l1_it.next(), l2_value = l2_it.next();
 
+            boolean l1_hasvalue = true;
+            boolean l2_hasvalue = true;
 
-            while(!l1_it.hasNext() || !l2_it.hasNext()){
-                if(l1_it.hasNext() && l2_it.hasNext()){
-                    if(!l1_hasvalue){
-                        l1_value=l1_it.hasNext();
-                    }
-                    if(!l2_hasvalue){
-                        l2_value=l2_it.hasNext();
-                    }
-
-                    if(l1_value<l2_value){
-                        l.add(l1_value);
-                        l1_hasvalue=false;
-                    }
-                    else{
-                        l.add(l2_value);
-                        l2_hasvalue=false;
-                    }
-                }
-                if(!l1_it.hasNext()){
-                    l.add()
-                }
-            }
-
-            if(l1_hasvalue && l2_hasvalue){
-                if(l1_value<l2_value){
+            if (!l1_it.hasNext() && !l2_it.hasNext() && l1_hasvalue && l2_hasvalue) {
+                if (l1_value < l2_value) {
                     l.add(l1_value);
                     l.add(l2_value);
-                }
-                else{
+                    l1_hasvalue = false;
+                    l2_hasvalue = false;
+                } else {
                     l.add(l2_value);
                     l.add(l1_value);
+                    l2_hasvalue = false;
+                    l1_hasvalue = false;
                 }
             }
-            else if (l1_hasvalue && !l2_hasvalue){l.add(l1_value);}
-            else if (!l1_hasvalue && l2_hasvalue){l.add(l2_value);}
+            while (l1_it.hasNext() || l2_it.hasNext()) {
+                if (!l1_hasvalue && l1_it.hasNext()) {
+                    l1_value = l1_it.next();
+                    l1_hasvalue = true;
+                }
+                if (!l2_hasvalue && l2_it.hasNext()) {
+                    l2_value = l2_it.next();
+                    l2_hasvalue = true;
+                }
 
+                if ((l1_value <= l2_value) && l1_hasvalue) {
+                    l.add(l1_value);
+                    l1_hasvalue = false;
+                } 
+                else if (!(l1_value <= l2_value) && l2_hasvalue){
+                    l.add(l2_value);
+                    l2_hasvalue = false;
+                }
 
-
+                if(!l1_it.hasNext() && l2_hasvalue){
+                    l.add(l2_value);
+                    l2_hasvalue=false;
+                }
+                else if(!l2_it.hasNext() && l1_hasvalue){
+                    l.add(l1_value);
+                    l1_hasvalue=false;
+                }
+            }
+            return l;
         }
     }
 
     static LinkedList<Integer> mergesort(LinkedList<Integer> l) {
-        return null; // a ser completada
+        if(l.size()<=1){return l;}
+        else{
+            LinkedList<Integer> l1 = new LinkedList<Integer>();
+            LinkedList<Integer> l2 = new LinkedList<Integer>();
+
+            split(l, l1, l2);
+
+            l=merge(mergesort(l1), mergesort(l2));
+            
+            return l;
+        }
+
     }
 }
 
