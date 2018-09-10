@@ -3,15 +3,26 @@
 class Quicksort {
 
     static void swap(int[] a, int i, int j) {
-        // a ser completada
+        int aux=a[i];
+        a[i]=a[j];
+        a[j]=aux;
+        return;
     }
 
     static int partition(int[] a, int l, int r) {
-        return 0; // a ser completada
+        int left=l, right=r;
+
+        while(left<right){
+            while(a[left]<=a[l]){left++;}
+            while(a[right]>a[l]){right--;}
+            if(a[left]>a[right]){swap(a, left, right);}
+        }
+        swap(a, l, right);
+        return right;
     }
 
     static void quickrec(int[] a, int l, int r) {
-        // a ser completada
+        
     }
 
     static void quicksort(int[] a) {
@@ -20,7 +31,7 @@ class Quicksort {
 
 }
 
-// A classe Ex3 é fornecida, para testar o código de Quicksort
+// A classe Ex3 ï¿½ fornecida, para testar o cï¿½digo de Quicksort
 class Ex3 {
     static boolean is_sorted(int[] a) {
         for (int i = 1; i < a.length; i++)
@@ -28,7 +39,7 @@ class Ex3 {
         return true;
     }
 
-    static final int M = 10; // os elementos estão entre 0..M-1
+    static final int M = 10; // os elementos estï¿½o entre 0..M-1
 
     static int[] occurrences(int[] a) {
         int[] occ = new int[M];
