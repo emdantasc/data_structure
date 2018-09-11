@@ -10,23 +10,35 @@ class Quicksort {
     }
 
     static int partition(int[] a, int l, int r) {
-        int left=l, right=r;
-
-        while(left<right){
-            while(a[left]<=a[l]){left++;}
-            while(a[right]>a[l]){right--;}
-            if(a[left]>a[right]){swap(a, left, right);}
+        
+        if(r-l<=1){
+            if(a[r]<a[l]){
+                swap(a, l, r);
+            }
+            return r;
         }
-        swap(a, l, right);
-        return right;
+        else{
+            int left=l, right=r; 
+            while(left<right){
+                while(a[left]<=a[l] && left<r){left++;}
+                while(a[right]>a[l] && right>l){right--;}
+                if(left<right){swap(a, left, right);}
+            }
+            swap(a, l, right);
+            return right;
+        }
     }
 
     static void quickrec(int[] a, int l, int r) {
-        
+        if(l<r){
+            int pivot=partition(a, l, r);
+            quickrec(a, l, pivot-1);
+            quickrec(a, pivot+1, r);
+        }
     }
 
     static void quicksort(int[] a) {
-        // a ser completada
+        quickrec(a, 0, a.length-1);
     }
 
 }
