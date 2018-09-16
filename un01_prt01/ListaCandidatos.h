@@ -55,14 +55,17 @@ class ListaCandidatos{
             while(it!=NULL){
                 if((it->conteudo->igual(_nome, _sobrenome)) && last==NULL){
                     this->head=it->next;
+                    delete it;
                     return true;
                 }
                 else if((it->conteudo->igual(_nome, _sobrenome)) && last!=NULL){
                     last->next=it->next;
+                    delete it;
                     return true;
                 }
                 else if((it->conteudo->igual(_nome, _sobrenome)) && (it->next==NULL)){
                     last->next=NULL;
+                    delete it;
                     return true;
                 }
                 else{
@@ -75,27 +78,30 @@ class ListaCandidatos{
     }
 
     void filtrarCandidatos(const int _nota){
-        NoCandidato* it=head;
-        NoCandidato* last=NULL;
+        NoCandidato* it=head, to_delete, last=NULL;
         
         while(it!=NULL){
             if((*it->conteudo->nota<_nota) && last==NULL){
                 head=it->next;
                 last=NULL;
+                to_delete=it;
                 it=it->next;
             }
             else if((*it->conteudo->nota<_nota) && last!=NULL){
                 last->next=it->next;
+                to_delete=it;
                 it=it->next;
             }
             else if((*it->conteudo->nota<_nota) && it->next==NULL){
                 last->next=NULL;
+                to_delete=it;
                 it=NULL;
             }
             else{
                 last=it;
                 it=it->next;
             }
+            delete to_delete;
         }
         return;
     }
