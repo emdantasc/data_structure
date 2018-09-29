@@ -3,12 +3,13 @@ package un02_prt01;
 import java.util.LinkedList;
 
 public class Pilha<Type>{
-    private LinkedList<Type> stack;
+    private final LinkedList<Type> stack;
 
     public Pilha(){
-        this.stack=new LinkedList<Type>();
+        this.stack=new LinkedList<>();
     }
 
+    @Override
     public String toString(){
         return stack.toString();
     }
@@ -23,23 +24,23 @@ public class Pilha<Type>{
 
     public Type desempilha(){
         if(estaVazia()){
-            throw new Error("Exmpy stack");
+            throw new Error("Empty stack");
         }
         else{
-        return this.stack.removeFirst();
+            return this.stack.removeFirst();
         }
     }
 
     public Type topo(){
         if(estaVazia()){
-            throw new Error("Exmpy stack");
+            throw new Error("Empty stack");
         }
         else{
-        return this.stack.getFirst();
+            return this.stack.getFirst();
         }
     }
     static void test1() {
-        Pilha<Double> aPilha = new Pilha<Double>();
+        Pilha<Double> aPilha = new Pilha<>();
         aPilha.empilha(1.1);
         aPilha.empilha(2.1);
         aPilha.empilha(3.1);
@@ -82,6 +83,6 @@ public class Pilha<Type>{
         }
         
     public static void main(String[] args) {
-        test2();
+        test1();
     }
 }
