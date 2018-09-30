@@ -4,10 +4,12 @@ class CalcRPN {
     // vari´aveis da instancia :
     // uma pilha para os c´alculos
     Pilha<Double> aPilha;
+    Pilha<Operacao> hist;
 
     // construtor
     CalcRPN() {
         aPilha=new Pilha<>();
+        hist=new Pilha<>();
     }
 
     // Adi¸c~ao de dois elementos do topo da pilha
@@ -15,6 +17,7 @@ class CalcRPN {
         Double A=aPilha.desempilha();
         Double B=aPilha.desempilha();
         aPilha.empilha(A+B);
+        hist.empilha(new Operacao('+',A,B));
     }
 
     // Subtra¸c~ao de dois elementos do topo da pilha
@@ -22,6 +25,7 @@ class CalcRPN {
         Double A=aPilha.desempilha();
         Double B=aPilha.desempilha();
         aPilha.empilha(B-A);
+        hist.empilha(new Operacao('-',A,B));
     }
 
     // Multiplica¸c~ao de dois elementos do topo da pilha
@@ -29,6 +33,7 @@ class CalcRPN {
         Double A=aPilha.desempilha();
         Double B=aPilha.desempilha();
         aPilha.empilha(A*B);
+        hist.empilha(new Operacao('*',A,B));
     }
 
     // Divis~ao de dois elementos no topo da pilha
@@ -36,6 +41,7 @@ class CalcRPN {
         Double A=aPilha.desempilha();
         Double B=aPilha.desempilha();
         aPilha.empilha(B/A);
+        hist.empilha(new Operacao('/',A,B));
     }
 
     // retorna o conteudo do topo da pilha
@@ -52,6 +58,7 @@ class CalcRPN {
         else if ("clear".equals(cmd)){aPilha.clear();}
         else{
             aPilha.empilha(Double.parseDouble(cmd));
+            hist.empilha(new Operacao(Double.parseDouble(cmd)));
         }
     }
 
