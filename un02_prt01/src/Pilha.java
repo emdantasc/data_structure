@@ -1,5 +1,3 @@
-package un02_prt01;
-
 import java.util.LinkedList;
 
 class Pilha<Type>{
