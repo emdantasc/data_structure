@@ -47,12 +47,11 @@ class CalcRPN {
 
     // interpretador de comandos
     void exec(String cmd) {
-        if(("+".equals(cmd))||("-".equals(cmd))||("*".equals(cmd))||("*".equals(cmd))){
-            if("+".equals(cmd)){this.mais();}
-            else if ("-".equals(cmd)){this.menos();}
-            else if ("*".equals(cmd)){this.vezes();}
-            else{this.dividido();}
-        }
+    	if("+".equals(cmd)){this.mais();}
+        else if ("-".equals(cmd)){this.menos();}
+        else if ("*".equals(cmd)){this.vezes();}
+        else if ("/".equals(cmd)){this.dividido();}
+        else if ("clear".equals(cmd)){aPilha.clear();}
         else{
             aPilha.empilha(Double.parseDouble(cmd));
         }
