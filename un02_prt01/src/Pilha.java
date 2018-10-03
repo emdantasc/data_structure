@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.Iterator;
 
 class Pilha<Type>{
     private final LinkedList<Type> stack;
@@ -10,6 +11,13 @@ class Pilha<Type>{
     @Override
     public String toString(){
         return stack.toString();
+    }
+    
+    public String toStringInverse() {
+    	Iterator<Type> It=this.stack.iterator();
+    	Pilha<Type> reverse=new Pilha<>();
+    	String output="[";
+    	
     }
 
     public boolean estaVazia(){

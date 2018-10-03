@@ -56,6 +56,7 @@ class CalcRPN {
         else if ("*".equals(cmd)){this.vezes();}
         else if ("/".equals(cmd)){this.dividido();}
         else if ("clear".equals(cmd)){aPilha.clear();}
+        else if ("hist".equals(cmd)) {hist.toStringInverse();}
         else{
             aPilha.empilha(Double.parseDouble(cmd));
             hist.empilha(new Operacao(Double.parseDouble(cmd)));
