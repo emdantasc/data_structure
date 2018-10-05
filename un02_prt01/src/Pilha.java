@@ -8,16 +8,29 @@ class Pilha<Type>{
         this.stack=new LinkedList<>();
     }
 
-    @Override
     public String toString(){
         return stack.toString();
     }
     
     public String toStringInverse() {
     	Iterator<Type> It=this.stack.iterator();
-    	Pilha<Type> reverse=new Pilha<>();
+    	Pilha<Type> buffer=new Pilha<>();
     	String output="[";
     	
+    	if(!this.estaVazia()) {
+	    	while(It.hasNext()) {
+	    		buffer.empilha(It.next());
+	    	}
+	    	while(!buffer.estaVazia()) {
+	    		output+=buffer.desempilha().toString();
+	    		if(!buffer.estaVazia()) {output+=", ";}
+	    		else {output+="]";}
+	    	}
+	    	return output;
+    	}
+    	else {
+    		return output+="]";
+    	}
     }
 
     public boolean estaVazia(){

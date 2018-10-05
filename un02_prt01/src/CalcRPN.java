@@ -55,8 +55,23 @@ class CalcRPN {
         else if ("-".equals(cmd)){this.menos();}
         else if ("*".equals(cmd)){this.vezes();}
         else if ("/".equals(cmd)){this.dividido();}
-        else if ("clear".equals(cmd)){aPilha.clear();}
-        else if ("hist".equals(cmd)) {hist.toStringInverse();}
+        else if ("clear".equals(cmd)){
+        	aPilha.clear();
+        	hist.clear();
+        }
+        else if ("hist".equals(cmd)) {System.out.println("Historico = "+hist.toStringInverse());}
+        else if	("undo".equals(cmd)) {
+        	if(hist.topo().code=='e') {
+        		aPilha.desempilha();
+        		hist.desempilha();
+        	}
+        	else {
+        		aPilha.desempilha();
+        		aPilha.empilha(hist.topo().b);
+        		aPilha.empilha(hist.topo().a);
+        		hist.desempilha();
+        	}
+        }
         else{
             aPilha.empilha(Double.parseDouble(cmd));
             hist.empilha(new Operacao(Double.parseDouble(cmd)));
