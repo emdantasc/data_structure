@@ -3,9 +3,9 @@ package internet_banking;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
-public class ServerDatabase extends Database{
-	public static final ArrayList<ArrayList<Conta>> contas;
-	public static final int N = 100;
+public class ServerDatabase{
+	private static ArrayList<ArrayList<Conta>> contas;
+	private static int N = 100;
 	
 	static{
 		contas = new ArrayList<ArrayList<Conta>>();
@@ -13,6 +13,8 @@ public class ServerDatabase extends Database{
 			contas.add(new ArrayList<Conta>());
 		}
 	}
+	
+	public static void add()
 	
 	public static int hashCode(String md5){
 		BigInteger bi = new BigInteger(md5, 16);
