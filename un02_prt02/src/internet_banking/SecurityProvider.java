@@ -35,6 +35,17 @@ public class SecurityProvider {
 		else {return null;}
 	}
 	
+	public static String[] md5ToClient(Conta conta) {
+		String crypt=conta.get_nomeCliente()+" "+conta.get_saldo();
+		char[] crypt_array=crypt.toCharArray();
+		String[] output=new String[crypt_array.length];
+		
+		for(int i=0; i<crypt_array.length; i++) {
+			output[i]=md5(String.valueOf(crypt_array[i]));
+		}
+		return output;
+	}
+	
 	public static void test1(){
 	System.out.println(SecurityProvider.md5("teste"));
 	}
@@ -44,7 +55,20 @@ public class SecurityProvider {
 	System.out.println(SecurityProvider.md5ToServer(c));
 	}
 	
+	public static void test4(){
+		Conta c = new Conta("124", "333", "1234","10", "john doe");
+		ServerDatabase.insereConta(c);
+		String chave = SecurityProvider.md5ToServer(c);
+		Conta conta = ServerDatabase.getConta(chave);
+		String chars[];
+		chars = SecurityProvider.md5ToClient(conta);
+		for(int i=0;i<chars.length;i++)
+		{
+			System.out.println(chars[i]);
+		}
+	}
+	
 	public static void main(String[] args) {
-		test2();
+		test4();
 	}
 }
