@@ -21,8 +21,7 @@ class FenwickTree {
 	public String toString() {
 		String buffer="";
 		
-		buffer+="["+String.valueOf(this.value);
-		buffer+=", "+String.valueOf(this.leftSize);
+		buffer+="["+String.valueOf(this.value)+", "+String.valueOf(this.leftSize);
 		
 		if(this.left!=null) {
 			buffer+=", "+this.left.toString();
@@ -37,11 +36,15 @@ class FenwickTree {
 		return buffer;
 	}
 	
-	static FenwickTree allZeros(int n){
+	public static FenwickTree allZeros(int n){
 		if (n==0) { return null;}
 		if (n==1) {return new FenwickTree(0);}
 		int m = n/2;
 		return new FenwickTree(n-m, allZeros(n-m), allZeros(m));
+	}
+	
+	public int size() {
+		
 	}
 	
 	public static void main(String[] args){
