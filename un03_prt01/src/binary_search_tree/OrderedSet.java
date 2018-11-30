@@ -14,4 +14,6 @@ public interface OrderedSet<E extends Comparable<E>> {
 	// update operations
 	public void add(E e);
 	public OrderedSet<E> union(OrderedSet<E> s);
+	
+	
 }
